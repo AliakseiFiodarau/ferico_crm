@@ -5,13 +5,11 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Models\Company as Model;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
+    public function up(): void {
         Schema::create(Model::TABLE_NAME, function (Blueprint $table) {
             $table->id();
             $table->string(Model::COLUMN_NAME);
@@ -26,8 +24,7 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
+    public function down(): void {
         Schema::dropIfExists(Model::TABLE_NAME);
     }
 };

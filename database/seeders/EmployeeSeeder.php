@@ -13,8 +13,7 @@ class EmployeeSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
-    {
+    public function run(): void {
         Model::factory(100)->create();
     }
 }

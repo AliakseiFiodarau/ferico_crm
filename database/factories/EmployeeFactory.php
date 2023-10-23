@@ -18,8 +18,7 @@ class EmployeeFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
-    {
+    public function definition(): array {
         return [
             Model::COLUMN_FIRST_NAME => fake()->firstName(),
             Model::COLUMN_LAST_NAME => fake()->lastName(),
