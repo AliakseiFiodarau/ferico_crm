@@ -43,7 +43,7 @@ return new class extends Migration {
      * Reverse the migrations.
      */
     public function down(): void {
-        Schema::create(Model::TABLE_NAME, function (Blueprint $table) {
+        Schema::table(Model::TABLE_NAME, function (Blueprint $table) {
             $table->dropForeign($this->companyIdForeignName);
         });
 

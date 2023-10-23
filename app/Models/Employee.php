@@ -21,11 +21,8 @@ class Employee extends Model
     public const COLUMN_PHONE = 'phone';
     public const COLUMN_NOTE = 'note';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var string[]
-     */
+    protected $table = self::TABLE_NAME;
+
     protected $fillable = [
         self::COLUMN_FIRST_NAME,
         self::COLUMN_LAST_NAME,

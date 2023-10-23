@@ -22,11 +22,8 @@ class Company extends Model
     public const COLUMN_URL = 'url';
     public const COLUMN_LOGO = 'logo';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var string[]
-     */
+    protected $table = self::TABLE_NAME;
+
     protected $fillable = [
         self::COLUMN_NAME,
         self::COLUMN_EMAIL,

@@ -14,6 +14,7 @@ return new class extends Migration
     {
         Schema::create(Model::TABLE_NAME, function (Blueprint $table) {
             $table->id();
+            $table->string(Model::COLUMN_NAME);
             $table->string(Model::COLUMN_PHONE);
             $table->string(Model::COLUMN_EMAIL)->unique();
             $table->string(Model::COLUMN_URL);
