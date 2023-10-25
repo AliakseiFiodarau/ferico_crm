@@ -9,10 +9,12 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use App\Models\Company;
 use App\DataTables\CompanyDataTable as DataTable;
+use App\Http\Requests\CompanyStoreRequest;
+use App\Http\Requests\CompanyUpdateRequest;
 
 class CompanyController extends Controller
 {
-    public function __construct(private CompanyService $service) {}
+    public function __construct(private readonly CompanyService $service) {}
 
     /**
      * Display a listing of the resource.
@@ -39,10 +41,12 @@ class CompanyController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
+     * @param CompanyStoreRequest $storeRequest
      * @return void
      */
-    public function store(Request $request): void
+    public function store(Request $request, CompanyStoreRequest $storeRequest): void
     {
+        $validated = $storeRequest->validated();
         $this->service->saveCompany($request);
     }
 
@@ -62,10 +66,16 @@ class CompanyController extends Controller
      *
      * @param Request $request
      * @param string $id
+     * @param CompanyUpdateRequest $updateRequest
      * @return void
      */
-    public function update(Request $request, string $id): void
+    public function update(
+        Request              $request,
+        string               $id,
+        CompanyUpdateRequest $updateRequest
+    ): void
     {
+        $validated = $updateRequest->validated();
         $this->service->saveCompany($request, $id);
     }
 

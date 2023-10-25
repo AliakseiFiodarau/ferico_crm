@@ -49,9 +49,6 @@
                                 <strong>Email</strong>
                                 <input type="email" name="email" class="form-control" placeholder="Employee Email"
                                        value="{{ $employee->email }}">
-                                @error('email')
-                                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                                @enderror
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-10 col-md-4 m-2">

@@ -9,6 +9,8 @@ use App\Models\Employee;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use App\DataTables\EmployeeDataTable as DataTable;
+use App\Http\Requests\EmployeeStoreRequest;
+use App\Http\Requests\EmployeeUpdateRequest;
 
 class EmployeeController extends Controller
 {
@@ -18,7 +20,7 @@ class EmployeeController extends Controller
      * @param DataTable $dataTable
      * @return mixed
      */
-    public function index(DataTable $dataTable): View
+    public function index(DataTable $dataTable): mixed
     {
         return $dataTable->render('employees.index');
     }
@@ -39,10 +41,12 @@ class EmployeeController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
+     * @param EmployeeStoreRequest $storeRequest
      * @return void
      */
-    public function store(Request $request): void
+    public function store(Request $request, EmployeeStoreRequest $storeRequest): void
     {
+        $validated = $storeRequest->validated();
         Employee::create($request->all());
     }
 
@@ -64,10 +68,16 @@ class EmployeeController extends Controller
      *
      * @param Request $request
      * @param string $id
+     * @param EmployeeUpdateRequest $updateRequest
      * @return void
      */
-    public function update(Request $request, string $id): void
+    public function update(
+        Request               $request,
+        string                $id,
+        EmployeeUpdateRequest $updateRequest
+    ): void
     {
+        $validated = $updateRequest->validated();
         $employee = Employee::find($id);
         $employee->update($request->all());
     }
