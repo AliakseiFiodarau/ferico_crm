@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->string(Model::COLUMN_PHONE);
             $table->string(Model::COLUMN_EMAIL)->unique();
             $table->string(Model::COLUMN_URL);
-            $table->string(Model::COLUMN_LOGO);
+            $table->string(Model::COLUMN_LOGO)->nullable();
             $table->timestamps();
         });
     }

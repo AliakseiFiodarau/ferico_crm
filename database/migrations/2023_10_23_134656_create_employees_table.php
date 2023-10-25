@@ -26,7 +26,7 @@ return new class extends Migration {
             $table->unsignedBigInteger(Model::COLUMN_COMPANY_ID);
             $table->string(Model::COLUMN_EMAIL)->unique();
             $table->string(Model::COLUMN_PHONE);
-            $table->string(Model::COLUMN_NOTE);
+            $table->string(Model::COLUMN_NOTE)->nullable();;
             $table->timestamps();
 
             $table->foreign(
