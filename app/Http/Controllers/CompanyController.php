@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Services\CompanyService;
+use App\Services\RequestService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use App\Models\Company;
@@ -14,7 +15,10 @@ use App\Http\Requests\CompanyUpdateRequest;
 
 class CompanyController extends Controller
 {
-    public function __construct(private readonly CompanyService $service) {}
+    public function __construct(
+        private readonly CompanyService $companyService,
+        private readonly RequestService $requestService
+    ) {}
 
     /**
      * Display a listing of the resource.
@@ -47,17 +51,19 @@ class CompanyController extends Controller
     public function store(Request $request, CompanyStoreRequest $storeRequest): void
     {
         $validated = $storeRequest->validated();
-        $this->service->saveCompany($request);
+        $this->companyService->saveCompany($request);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Company $company
+     * @param Request $request
      * @return View
      */
-    public function edit(Company $company): View
+    public function edit(Request $request): View
     {
+        $id = $this->requestService->getEntityId($request);
+        $company = Company::find($id);
         return view('companies.edit', compact('company'));
     }
 
@@ -65,18 +71,14 @@ class CompanyController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param string $id
      * @param CompanyUpdateRequest $updateRequest
      * @return void
      */
-    public function update(
-        Request              $request,
-        string               $id,
-        CompanyUpdateRequest $updateRequest
-    ): void
+    public function update(Request $request, CompanyUpdateRequest $updateRequest): void
     {
         $validated = $updateRequest->validated();
-        $this->service->saveCompany($request, $id);
+        $id = $this->requestService->getEntityId($request);
+        $this->companyService->saveCompany($request, $id);
     }
 
     /**
@@ -85,8 +87,9 @@ class CompanyController extends Controller
      * @param string $id
      * @return void
      */
-    public function destroy(string $id): void
+    public function destroy(Request $request): void
     {
+        $id = $this->requestService->getEntityId($request);
         $company = Company::find($id);
         $company->delete($id);
     }

@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="card">
-            <div class="card-header">Manage Companies</div>
+            <div class="card-header">{{__("Manage Companies")}}</div>
             <div class="card-body">
                 {{ $dataTable->table() }}
             </div>
@@ -12,11 +12,11 @@
 
     <script>
         $(document).on('click', '.delete', function (event) {
-            if (confirm("Delete this company?") === true) {
+            if (confirm("{{__("Delete this company?")}}") === true) {
                 const id = $(event.currentTarget).data('id');
 
                 $.ajax({
-                    url: 'companies/' + id,
+                    url: id,
                     type: "DELETE",
                     cache: false,
                     data: {"_token": "{{ csrf_token() }}"},

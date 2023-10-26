@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Services\RequestService;
 use Illuminate\Contracts\View\View;
 use App\Models\Employee;
 use App\Models\Company;
@@ -14,6 +15,10 @@ use App\Http\Requests\EmployeeUpdateRequest;
 
 class EmployeeController extends Controller
 {
+    public function __construct(
+        private readonly RequestService $requestService
+    ) {}
+
     /**
      * Display a listing of the resource.
      *
@@ -28,12 +33,12 @@ class EmployeeController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @param Company $company
      * @return View
      */
-    public function create(Company $company): View
+    public function create(): View
     {
         $companies = Company::all();
+
         return view('employees.create', compact('companies'));
     }
 
@@ -53,13 +58,15 @@ class EmployeeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Employee $employee
-     * @param Company $company
+     * @param Request $request
      * @return View
      */
-    public function edit(Employee $employee, Company $company): View
+    public function edit(Request $request): View
     {
+        $id = $this->requestService->getEntityId($request);
+        $employee = Employee::find($id);
         $companies = Company::all();
+
         return view('employees.edit', compact('employee', 'companies'));
     }
 
@@ -67,17 +74,13 @@ class EmployeeController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param string $id
      * @param EmployeeUpdateRequest $updateRequest
      * @return void
      */
-    public function update(
-        Request               $request,
-        string                $id,
-        EmployeeUpdateRequest $updateRequest
-    ): void
+    public function update(Request $request, EmployeeUpdateRequest $updateRequest): void
     {
         $validated = $updateRequest->validated();
+        $id = $this->requestService->getEntityId($request);
         $employee = Employee::find($id);
         $employee->update($request->all());
     }
@@ -88,8 +91,9 @@ class EmployeeController extends Controller
      * @param string $id
      * @return void
      */
-    public function destroy(string $id): void
+    public function destroy(Request $request): void
     {
+        $id = $this->requestService->getEntityId($request);
         $employee = Employee::find($id);
         $employee->delete($id);
     }

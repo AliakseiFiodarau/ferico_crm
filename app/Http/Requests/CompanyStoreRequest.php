@@ -32,4 +32,16 @@ class CompanyStoreRequest extends FormRequest
             Company::COLUMN_LOGO => 'file'
         ];
     }
+
+    /**
+     * Custom message for validation
+     *
+     * @return string[]
+     */
+    public function messages()
+    {
+        return [
+            'email.required' => __('Email is required!')
+        ];
+    }
 }

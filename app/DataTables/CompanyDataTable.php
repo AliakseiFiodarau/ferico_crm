@@ -26,7 +26,7 @@ class CompanyDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addColumn(Model::COLUMN_LOGO, function ($data){
                 $logo = $data->logo;
-                return $logo ? "<img src=/storage/images/logo/$logo/>" : null;
+                return $logo ? "<img src=/storage/images/logo/$logo width='50' height='50'>" : null;
             })
             ->addColumn('action', 'companies.action')
             ->rawColumns(['logo', 'action'])
