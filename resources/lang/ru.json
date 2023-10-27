@@ -1,4 +1,8 @@
 {
+    "Companies": "Компании",
+    "Employees": "Сотрудники",
+    "List": "Список",
+    "Create": "Создать",
     "Manage Companies": "Компании",
     "Delete this company?": "Вы уверены, что хотите удалить это компанию?",
     "Create New Company": "Новая Компания",
@@ -36,5 +40,14 @@
     "Note": "Пометки",
     "Employee": "Сотрудник",
     "is updated" : "успешно обновлён",
-    "Logout": "Выйти"
+    "Register": "Регистрация",
+    "Log in": "Войти",
+    "Login": "Войти",
+    "Logout": "Выйти",
+    "Email Address": "Электронная почта",
+    "Password": "Пароль",
+    "Remember Me": "Запомнить",
+    "Forgot Your Password?": "Забыли пароль?"
+
+
 }

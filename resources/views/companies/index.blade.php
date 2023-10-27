@@ -12,16 +12,19 @@
 
     <script>
         $(document).on('click', '.delete', function (event) {
-            if (confirm("{{__("Delete this company?")}}") === true) {
+            if (confirm("{{ __("Delete this company?") }}") === true) {
                 const id = $(event.currentTarget).data('id');
 
                 $.ajax({
-                    url: id,
+                    url: 'companies/' + id,
                     type: "DELETE",
                     cache: false,
                     data: {"_token": "{{ csrf_token() }}"},
                     success: function (response) {
                         $('#company-table').DataTable().ajax.reload(null, false);
+                    },
+                    error: function () {
+                        alert("{{ __("Something gone wrong") }}");
                     }
                 });
             }

@@ -88,7 +88,7 @@ class EmployeeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param string $id
+     * @param Request $request
      * @return void
      */
     public function destroy(Request $request): void
