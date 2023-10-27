@@ -60,21 +60,22 @@ class EmployeeDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make(Model::COLUMN_FIRST_NAME),
-            Column::make(Model::COLUMN_LAST_NAME),
+            Column::make(Model::COLUMN_FIRST_NAME)->title(__("First Name")),
+            Column::make(Model::COLUMN_LAST_NAME)->title(__("Last Name")),
             'Company' => new Column([
-                'title' => 'Company',
+                'title' => (__("Company")),
                 'data' => 'company.name',
                 'name' => 'company.name'
             ]),
-            Column::make(Model::COLUMN_EMAIL),
-            Column::make(Model::COLUMN_PHONE),
-            Column::make(Model::COLUMN_NOTE),
+            Column::make(Model::COLUMN_EMAIL)->title(__("Email")),
+            Column::make(Model::COLUMN_PHONE)->title(__("Phone")),
+            Column::make(Model::COLUMN_NOTE)->title(__("Note")),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
                 ->width(60)
-                ->addClass('text-center'),
+                ->addClass('text-center')
+                ->title(__("Action"))
         ];
     }
 

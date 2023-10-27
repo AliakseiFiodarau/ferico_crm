@@ -66,16 +66,17 @@ class CompanyDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make(Model::COLUMN_LOGO),
-            Column::make(Model::COLUMN_NAME),
-            Column::make(Model::COLUMN_EMAIL),
-            Column::make(Model::COLUMN_URL),
-            Column::make(Model::COLUMN_PHONE),
+            Column::make(Model::COLUMN_LOGO)->title(__("Logo")),
+            Column::make(Model::COLUMN_NAME)->title(__("Name")),
+            Column::make(Model::COLUMN_EMAIL)->title(__("Email")),
+            Column::make(Model::COLUMN_URL)->title(__("Website")),
+            Column::make(Model::COLUMN_PHONE)->title(__("Phone")),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
                 ->width(60)
-                ->addClass('text-center'),
+                ->addClass('text-center')
+                ->title(__("Action"))
         ];
     }
 
